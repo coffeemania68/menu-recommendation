@@ -1,175 +1,143 @@
-/* Basic styling and layout */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #ffe599; /* Yellow background */
     margin: 0;
-    padding: 0;
-    text-align: center;
+    background-color: #f8f8f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
-    background-color: #ff9800; /* Orange header */
-    color: #fff;
+    background-color: #ff6b6b;
+    color: white;
+    text-align: center;
     padding: 20px 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-h1 {
+header img {
+    height: 50px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+header h1 {
     margin: 0;
-    font-size: 2.5em;
-}
-
-p {
-    margin: 10px 0;
-    font-size: 1.2em;
+    font-size: 2em;
+    display: inline-block;
 }
 
 main {
+    width: 90%;
+    max-width: 800px;
     padding: 20px;
+    box-sizing: border-box;
 }
 
-section {
-    margin-bottom: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.preference-section {
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-h2 {
-    color: #ff9800; /* Orange titles */
+.preference-section h2 {
+    color: #ff6b6b;
+    margin-top: 0;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.options button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.options button:hover {
+    background-color: #e0e0e0;
+}
+
+.options button.selected {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+#recommendation-result {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+#recommendation-result h2 {
+    color: #00bcd4;
     margin-top: 0;
 }
 
-/* Theme buttons (Slick Carousel) */
-.theme-buttons .slick-slide button {
-    margin: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff; /* Example color */
-    transition: background-color 0.3s ease;
-}
-
-.theme-buttons .slick-slide button:hover {
-    background-color: #0056b3;
-}
-
-.theme-buttons .slick-prev:before,
-.theme-buttons .slick-next:before {
-    color: #007bff; /* Example color for arrows */
-}
-
-/* Preference buttons */
-.preference-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.preference-buttons .preference-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1em;
-}
-
-.preference-buttons .preference-button:hover {
-    background-color: #0056b3;
-}
-
-.preference-buttons .preference-button.selected {
-    background-color: #0056b3;
-}
-
-/* Recommend button */
-#preference-recommend, #random-recommend {
-    background-color: #ff9800;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease;
-    display: block;
-    width: 80%;
-    max-width: 300px;
-    margin: 20px auto;
-}
-
-#preference-recommend:hover, #random-recommend:hover {
-    background-color: #e08600;
-}
-
-/* Results display */
-#theme-result, #preference-result, #random-cards {
+#menu-list {
     margin-top: 20px;
+    font-size: 1.1em;
 }
 
-.random-card {
-    background-color: #e9e9e9;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 5px;
+#menu-list p {
+    margin-bottom: 10px;
+}
+
+#killing-time {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.fun-button {
     display: inline-block;
-    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #9575cd;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-/* Ad section */
-#ad-section {
-    background-color: #f8f8f8;
-    padding: 15px;
-    border-radius: 10px;
+.fun-button:hover {
+    background-color: #7e57c2;
 }
 
-#ad-section a {
-    color: #007bff;
-    text-decoration: underline;
-}
-
-/* Footer */
 footer {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    font-size: 0.8em;
+    margin-top: 40px;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
+/* Responsive Design */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5em;
     }
-
-    h1 {
-        font-size: 2em;
+    .options {
+        justify-content: center;
     }
-
-    p {
-        font-size: 1em;
-    }
-
-    .theme-buttons button, .preference-buttons .preference-button {
-        padding: 10px 15px;
+    .options button {
         font-size: 0.9em;
-    }
-
-    #preference-recommend, #random-recommend {
-        font-size: 1em;
-        width: 90%;
+        padding: 8px 12px;
     }
 }
-
-/* Additional styles for form elements, etc. */
