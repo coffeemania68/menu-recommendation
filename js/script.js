@@ -204,21 +204,6 @@ const menuData = [
         { "name": "아이스크림", "type": "구매" }
     ]}
 ],
-    { "theme": "매운맛", "keywords": ["매운"], "items": [
-        { "name": "불닭볶음면", "type": "배달" }, { "name": "마라탕", "type": "배달" },
-        { "name": "낙지볶음", "type": "요리" }, { "name": "매운 갈비찜", "type": "요리" },
-        { "name": "떡볶이", "type": "배달" }, { "name": "매운 닭발", "type": "배달" },
-        { "name": "매운 라면", "type": "배달" }, { "name": "매운 짬뽕", "type": "배달" },
-        { "name": "매운 족발", "type": "배달" }, { "name": "매운 오징어볶음", "type": "요리" }
-    ]},
-    { "theme": "달달", "keywords": ["달콤", "디저트"], "items": [
-        { "name": "케이크", "type": "배달" }, { "name": "아이스크림", "type": "배달" },
-        { "name": "푸딩", "type": "요리" }, { "name": "마카롱", "type": "배달" },
-        { "name": "과일 샐러드", "type": "요리" }, { "name": "타르트", "type": "요리" },
-        { "name": "쿠키", "type": "요리" }, { "name": "브라우니", "type": "요리" },
-        { "name": "파이", "type": "요리" }, { "name": "젤리", "type": "요리" }
-    ]
-    },
     {
         "theme": "건강식",
         "items": [
@@ -290,7 +275,9 @@ preferenceButtons.forEach(button => {
 });
 
 function recommendMenu() {
-    menuListDiv.innerHTML = '';
+     if (!menuItem.keywords || !Array.isArray(menuItem.keywords)) {
+        continue; // keywords가 없거나 배열이 아닌 경우 스킵
+    }menuListDiv.innerHTML = '';
     let menuScores = {}; // 메뉴별 점수를 저장할 객체
 
     if (Object.keys(selectedPreferences).length === 0) {
