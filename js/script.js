@@ -161,20 +161,143 @@ const menuData = [
     { "theme": "가성비", "keywords": ["가성비", "저렴"], "items": [
         { "name": "백반", "type": "외식" }, { "name": "뷔페", "type": "외식" },
         { "name": "국밥", "type": "외식" }, { "name": "스파게티", "type": "요리(저렴재료)" },
-        /* ... 이전 스타일 ... */
+          { "name": "짜장면", "type": "배달" }
+    ]},
+    { "theme": "건강식", "keywords": ["건강", "웰빙"], "items": [
+        { "name": "샐러드", "type": "요리" }, { "name": "닭가슴살", "type": "요리" },
+        { "name": "두부", "type": "요리" }, { "name": "채소", "type": "요리" },
+        { "name": "과일", "type": "요리" }
+    ]},
+    { "theme": "치팅데이", "keywords": ["치팅데이", "맘껏"], "items": [
+        { "name": "피자", "type": "배달" }, { "name": "햄버거", "type": "배달" },
+        { "name": "치킨", "type": "배달" }, { "name": "파스타", "type": "요리" },
+        { "name": "아이스크림", "type": "배달" }
+    ]},
+    { "theme": "단백질", "keywords": ["단백질"], "items": [
+        { "name": "닭가슴살", "type": "요리" }, { "name": "스테이크", "type": "요리" },
+        { "name": "연어", "type": "요리/배달" }, { "name": "계란", "type": "요리" },
+        { "name": "콩", "type": "요리" }
+    ]},
+    { "theme": "소화", "keywords": ["소화", "부드러운"], "items": [
+        { "name": "죽", "type": "요리/배달" }, { "name": "스프", "type": "요리" },
+        { "name": "미음", "type": "요리" }, { "name": "요거트", "type": "요리" },
+        { "name": "과일", "type": "요리" }
+    ]},
+    { "theme": "저녁", "keywords": ["저녁"], "items": [
+        { "name": "김치찌개", "type": "요리" }, { "name": "파스타", "type": "요리" },
+        { "name": "삼겹살", "type": "요리/배달" }, { "name": "비빔밥", "type": "요리" },
+        { "name": "닭볶음탕", "type": "요리" }
+    ]},
+    { "theme": "야식", "keywords": ["야식"], "items": [
+        { "name": "치킨", "type": "배달" }, { "name": "피자", "type": "배달" },
+        { "name": "라면", "type": "배달" }, { "name": "떡볶이", "type": "배달" },
+        { "name": "족발", "type": "배달" }
+    ]},
+    { "theme": "아점", "keywords": ["아점", "브런치"], "items": [
+        { "name": "샌드위치", "type": "요리" }, { "name": "토스트", "type": "요리" },
+        { "name": "오믈렛", "type": "요리" }, { "name": "샐러드", "type": "요리" },
+        { "name": "브런치 세트", "type": "외식" }
+    ]},
+    { "theme": "간식", "keywords": ["간식"], "items": [
+        { "name": "떡볶이", "type": "배달" }, { "name": "튀김", "type": "배달" },
+        { "name": "과자", "type": "구매" }, { "name": "빵", "type": "구매" },
+        { "name": "아이스크림", "type": "구매" }
+    ]}
+];
 
-#kakao-share-button {
-    background-color: #FEE500;
-    color: #3A1D1D;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+const preferenceButtons = document.querySelectorAll('.preference-section button');
+const menuListDiv = document.getElementById('menu-list');
+let selectedPreferences = {};
+
+preferenceButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const preferenceType = button.closest('.preference-section').id.replace('-preference', '');
+        const preferenceValue = button.dataset.preference;
+
+        // 선택된 버튼 스타일 변경 및 다른 버튼 선택 해제 (단일 선택)
+        button.parentNode.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        button.classList.add('selected');
+        selectedPreferences[preferenceType] = preferenceValue;
+
+        recommendMenu();
+    });
+});
+
+function recommendMenu() {
+    menuListDiv.innerHTML = '';
+    let matchedMenus = [];
+
+    if (Object.keys(selectedPreferences).length === 0) {
+        menuListDiv.innerHTML = '<p>당신의 취향을 알려주세요! 😋</p>';
+        return;
+    }
+
+    menuData.forEach(menuItem => {
+        let match = true;
+        for (const prefType in selectedPreferences) {
+            if (selectedPreferences.hasOwnProperty(prefType)) {
+                const selectedValue = selectedPreferences[prefType];
+                if (!menuItem.keywords.includes(selectedValue)) {
+                    match = false;
+                    break;
+                }
+            }
+        }
+        if (match) {
+            matchedMenus = matchedMenus.concat(menuItem.items);
+        }
+    });
+
+    if (matchedMenus.length > 0) {
+        const uniqueMenus = [...new Set(matchedMenus.map(m => m.name))];
+        uniqueMenus.forEach(menuName => {
+            const menuDetail = matchedMenus.find(m => m.name === menuName);
+            const p = document.createElement('p');
+            p.textContent = `${menuName} (${menuDetail.type === '배달' ? '배달 🛵' : '요리 🍳'})`;
+            menuListDiv.appendChild(p);
+        });
+         // "카카오톡 보내기" 버튼 추가
+         const kakaoButton = document.createElement('button');
+         kakaoButton.textContent = '😋 이 메뉴 어때? 카톡 보내기';
+         kakaoButton.id = 'kakao-share-button';
+         kakaoButton.addEventListener('click', shareOnKakao);
+         menuListDiv.appendChild(kakaoButton);
+
+    } else {
+        menuListDiv.innerHTML = '<p>음... 딱 맞는 메뉴가 없네요. 다른 걸 골라볼까요? 🤔</p>';
+    }
 }
 
-#kakao-share-button:hover {
-    background-color: #fbd800;
+function shareOnKakao() {
+    const selectedMenuText = Array.from(menuListDiv.querySelectorAll('p'))
+        .map(p => p.textContent)
+        .join(', ');
+
+    Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: '✨ 맛잘알 가이드가 추천하는 오늘의 저녁 메뉴! ✨',
+            description: `오늘 당신에게 딱 맞는 메뉴는 바로바로~!\n\n${selectedMenuText}\n\n이 메뉴 어때요? 😋`,
+            imageUrl: 'https://blog.kakaocdn.net/dn/dzWmzX/btsLNAaXJvJ/n2T2tzushSqMFCgqkjnEKK/img.webp',
+            link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
+            },
+        },
+        buttons: [
+            {
+                title: '나도 추천 받으러 가기',
+                link: {
+                    mobileWebUrl: window.location.href,
+                    webUrl: window.location.href,
+                },
+            },
+        ],
+    });
 }
+
+// 카카오톡 SDK 초기화 (API 키 필요)
+Kakao.init('70a1b0749e2970a8672d26e7193c3f62');
+
