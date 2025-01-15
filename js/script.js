@@ -1,3 +1,31 @@
+// 사운드 관리를 위한 객체
+const SoundManager = {
+    pop: document.getElementById('popSound'),
+    success: document.getElementById('successSound'),
+    spin: document.getElementById('spinSound'),
+    
+    init() {
+        this.pop.volume = 0.3;
+        this.success.volume = 0.3;
+        this.spin.volume = 0.3;
+    },
+    
+    playPop() {
+        this.pop.currentTime = 0;
+        this.pop.play().catch(e => console.log('sound play error:', e));
+    },
+    
+    playSuccess() {
+        this.success.currentTime = 0;
+        this.success.play().catch(e => console.log('sound play error:', e));
+    },
+    
+    playSpin() {
+        this.spin.currentTime = 0;
+        this.spin.play().catch(e => console.log('sound play error:', e));
+    }
+};
+
 const menuData = [
     {
         "theme": "매운맛",
@@ -275,30 +303,49 @@ const menuData = [
     }
 ];
 
-const preferenceButtons = document.querySelectorAll('.preference-section button');
+// 룰렛 관련 변수들
+let spinning = false;
+const roulette = document.getElementById('roulette');
+const ctx = roulette.getContext('2d');
 const menuListDiv = document.getElementById('menu-list');
 let selectedPreferences = {};
 
-preferenceButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const preferenceType = button.closest('.preference-section').id.replace('-preference', '');
-        const preferenceValue = button.dataset.preference;
+// 룰렛 초기화 함수
+function initializeRoulette() {
+    const centerX = roulette.width / 2;
+    const centerY = roulette.height / 2;
+    const radius = Math.min(centerX, centerY) - 10;
 
-        // 선택된 버튼 스타일 변경 및 다른 버튼 선택 해제 (단일 선택)
-        button.parentNode.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        button.classList.add('selected');
-        selectedPreferences[preferenceType] = preferenceValue;
+    ctx.clearRect(0, 0, roulette.width, roulette.height);
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = '#7c3aed';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
 
+// 룰렛 회전 함수
+function spinRoulette() {
+    if (spinning) return;
+    
+    SoundManager.playSpin();
+    spinning = true;
+    const spinButton = document.getElementById('spin-button');
+    spinButton.disabled = true;
+    
+    const totalRotation = 3600 + Math.random() * 360;
+    roulette.style.transform = `rotate(${totalRotation}deg)`;
+    
+    setTimeout(() => {
+        spinning = false;
+        spinButton.disabled = false;
         recommendMenu();
-    });
-});
+    }, 3000);
+}
 
+// 메뉴 추천 함수
 function recommendMenu() {
-     if (!menuItem.keywords || !Array.isArray(menuItem.keywords)) {
-        continue; // keywords가 없거나 배열이 아닌 경우 스킵
-    }menuListDiv.innerHTML = '';
+    menuListDiv.innerHTML = '';
     let menuScores = {}; // 메뉴별 점수를 저장할 객체
 
     if (Object.keys(selectedPreferences).length === 0) {
@@ -308,6 +355,10 @@ function recommendMenu() {
 
     // 각 메뉴별로 점수 계산
     menuData.forEach(menuItem => {
+        if (!menuItem.keywords || !Array.isArray(menuItem.keywords)) {
+            return; // keywords가 없거나 배열이 아닌 경우 스킵
+        }
+        
         let score = 0;
         for (const prefType in selectedPreferences) {
             if (selectedPreferences.hasOwnProperty(prefType)) {
@@ -332,28 +383,67 @@ function recommendMenu() {
 
     if (sortedMenus.length > 0) {
         sortedMenus.forEach(([menuName, score]) => {
-            const menuDetail = menuData.find(theme => theme.items.find(item => item.name === menuName)).items.find(item => item.name === menuName);
-            const p = document.createElement('p');
-            p.textContent = `${menuName} (${menuDetail.type === '배달' ? '배달 🛵' : '요리 🍳'}) - 매칭 점수: ${score}`;
-            menuListDiv.appendChild(p);
+            const menuDetail = menuData.find(theme => 
+                theme.items.find(item => item.name === menuName)
+            ).items.find(item => item.name === menuName);
+            
+            const menuItem = document.createElement('div');
+            menuItem.className = 'menu-item';
+            menuItem.innerHTML = `
+                <h4 class="menu-name">${menuName}</h4>
+                <p class="menu-type">${menuDetail.type === '배달' ? '배달 🛵' : '요리 🍳'}</p>
+                <p class="menu-score">매칭 점수: ${score}</p>
+            `;
+            menuListDiv.appendChild(menuItem);
         });
 
-        // "카카오톡 보내기" 버튼 추가
+        // 카카오톡 공유 버튼 추가
         const kakaoButton = document.createElement('button');
         kakaoButton.textContent = '😋 이 메뉴 어때? 카톡 보내기';
-        kakaoButton.id = 'kakao-share-button';
+        kakaoButton.className = 'share-button';
         kakaoButton.addEventListener('click', shareOnKakao);
         menuListDiv.appendChild(kakaoButton);
+
+        // 컨페티 효과
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
 
     } else {
         menuListDiv.innerHTML = '<p>음... 딱 맞는 메뉴가 없네요. 다른 걸 골라볼까요? 🤔</p>';
     }
 }
 
+// 취향 버튼 이벤트 핸들러
+const preferenceButtons = document.querySelectorAll('.preference-section button');
+
+preferenceButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        SoundManager.playPop();
+        
+        const preferenceType = button.closest('.preference-section').id.replace('-preference', '');
+        const preferenceValue = button.dataset.preference;
+
+        // 선택된 버튼 스타일 변경 및 다른 버튼 선택 해제
+        button.parentNode.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        button.classList.add('selected');
+        selectedPreferences[preferenceType] = preferenceValue;
+    });
+});
+
+// 카카오톡 공유 함수
 function shareOnKakao() {
-    const selectedMenuText = Array.from(menuListDiv.querySelectorAll('p'))
-        .map(p => p.textContent)
-        .join(', ');
+    const selectedMenuText = Array.from(menuListDiv.querySelectorAll('.menu-item'))
+        .map(item => {
+            const name = item.querySelector('.menu-name').textContent;
+            const type = item.querySelector('.menu-type').textContent;
+            return `${name} (${type})`;
+        })
+        .join('\n');
 
     Kakao.Share.sendDefault({
         objectType: 'feed',
@@ -378,6 +468,32 @@ function shareOnKakao() {
     });
 }
 
-// 카카오톡 SDK 초기화 (API 키 필요)
+// 스핀 버튼 이벤트 리스너
+document.getElementById('spin-button').addEventListener('click', spinRoulette);
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', () => {
+    initializeRoulette();
+    SoundManager.init();
+    
+    // 음소거 버튼 추가
+    const muteButton = document.createElement('button');
+    muteButton.innerHTML = '🔊';
+    muteButton.className = 'mute-button';
+    muteButton.addEventListener('click', () => {
+        const isMuted = muteButton.innerHTML === '🔇';
+        muteButton.innerHTML = isMuted ? '🔊' : '🔇';
+        [SoundManager.pop, SoundManager.success, SoundManager.spin].forEach(sound => {
+            sound.muted = !isMuted;
+        });
+    });
+    document.body.appendChild(muteButton);
+});
+
+// 카카오톡 SDK 초기화
 Kakao.init('70a1b0749e2970a8672d26e7193c3f62');
 
+// 모바일 대응을 위한 터치 이벤트
+document.addEventListener('touchstart', () => {
+    SoundManager.init();
+}, { once: true });
