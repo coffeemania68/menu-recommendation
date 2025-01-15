@@ -660,44 +660,6 @@ preferenceButtons.forEach(button => {
     });
 });
 
-if (sortedMenus.length > 0) {
-        sortedMenus.slice(0, 3).forEach(([menuName, score]) => {
-            const menuDetail = menuData.find(theme => 
-                theme.items.find(item => item.name === menuName)
-            ).items.find(item => item.name === menuName);
-            
-            const menuItem = document.createElement('div');
-            menuItem.className = 'menu-item';
-            menuItem.innerHTML = `
-                <h4 class="menu-name">${menuName}</h4>
-                <p class="menu-type">${menuDetail.type === '배달' ? '배달 🛵' : '요리 🍳'}</p>
-                <p class="menu-score">매칭 점수: ${score}</p>
-            `;
-            menuListDiv.appendChild(menuItem);
-        });
-
-    
-        document.getElementById('result').classList.remove('hidden');
-
-        // 카카오톡 공유 버튼 추가
-        const kakaoButton = document.createElement('button');
-        kakaoButton.className = 'share-button';
-        kakaoButton.textContent = '😋 이 메뉴 어때? 카톡 보내기';
-        kakaoButton.addEventListener('click', shareOnKakao);
-        menuListDiv.appendChild(kakaoButton);
-
-        // 컨페티 효과
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
-        });
-
-        SoundManager.playSuccess();
-    } else {
-        menuListDiv.innerHTML = '<p>음... 딱 맞는 메뉴가 없네요. 다른 걸 골라볼까요? 🤔</p>';
-    }
-}
 // 카카오톡 공유 함수
 function shareOnKakao() {
     const selectedMenuText = Array.from(document.querySelectorAll('.menu-item'))
