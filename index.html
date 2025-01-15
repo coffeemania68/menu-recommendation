@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오늘 저녁 뭐 먹지?</title>
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script defer src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
@@ -20,8 +17,7 @@
         <section id="preference-section">
             <h2>취향 저격 추천</h2>
             <div class="preference-buttons">
-                <!-- 여기에 40개의 선택 버튼이 들어갑니다. -->
-            </div>
+                </div>
             <button id="preference-recommend">추천 받기</button>
             <div id="preference-result"></div>
         </section>
@@ -33,16 +29,11 @@
             <button id="random-recommend">한 번 더!</button>
             <p id="game-message"></p> 
         </section>
+
         <section id="theme-section">
             <h2>테마별 추천</h2>
-            <div class="theme-buttons">
-                <button data-theme="오늘 뭐 먹지?">오늘 뭐 먹지?</button>
-                <button data-theme="간단하게 뚝딱">간단하게 뚝딱</button>
-                <button data-theme="오늘만큼은 특별하게">오늘만큼은 특별하게</button>
-                <button data-theme="다이어트 중인데...">다이어트 중인데...</button>
-                <button data-theme="혼밥 메뉴">혼밥 메뉴</button>
-            </div>
-            <div id="theme-result"></div>
+            <div class="slider theme-buttons">
+                </div>
         </section>
 
         <section id="ad-section">
@@ -56,6 +47,8 @@
     <footer>
         <p>© 2025 저녁 메뉴 추천 서비스</p>
     </footer>
-    <script src="script.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
