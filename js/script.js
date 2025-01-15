@@ -580,7 +580,7 @@ function recommendMenu() {
         if (!menuItem.keywords || !Array.isArray(menuItem.keywords)) {
             return;
         }
-        
+
         let score = 0;
         for (const prefType in selectedPreferences) {
             if (selectedPreferences.hasOwnProperty(prefType)) {
@@ -605,10 +605,10 @@ function recommendMenu() {
 
     if (sortedMenus.length > 0) {
         sortedMenus.slice(0, 3).forEach(([menuName, score]) => {
-            const menuDetail = menuData.find(theme => 
+            const menuDetail = menuData.find(theme =>
                 theme.items.find(item => item.name === menuName)
             ).items.find(item => item.name === menuName);
-            
+
             const menuItem = document.createElement('div');
             menuItem.className = 'menu-item';
             menuItem.innerHTML = `
