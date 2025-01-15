@@ -102,18 +102,6 @@ body {
     }
 }
 
-/* 카테고리 태그 스타일 */
-.category-tag {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-right: 0.5rem;
-    background: #f3e8ff;
-    color: #6d28d9;
-}
-
 /* 메뉴 이름 스타일 */
 .menu-name {
     font-size: 1.25rem;
@@ -122,163 +110,11 @@ body {
     margin: 0.5rem 0;
 }
 
-/* 설명 텍스트 스타일 */
-.menu-description {
+/* 메뉴 타입 스타일 */
+.menu-type {
     color: #6b7280;
     font-size: 0.95rem;
     line-height: 1.5;
-}
-
-/* 가격 스타일 */
-.menu-price {
-    font-weight: 600;
-    color: #7c3aed;
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
-}
-
-/* 공유 버튼 스타일 */
-.share-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    background: #7c3aed;
-    color: white;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-    margin-top: 1rem;
-}
-
-.share-button:hover {
-    background: #6d28d9;
-    transform: translateY(-2px);
-}
-
-/* 로딩 애니메이션 */
-.loading {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #7c3aed;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 2rem auto;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-
-    .preference-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-
-    .roulette-container {
-        width: 250px;
-        height: 250px;
-    }
-
-    .menu-item {
-        padding: 1rem;
-    }
-}
-
-/* 커스텀 스크롤바 */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f3e8ff;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #c084fc;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #7c3aed;
-}
-
-/* 글래스모피즘 효과 */
-.glass-effect {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-/* 툴팁 스타일 */
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.5rem;
-    background: #1f2937;
-    color: white;
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
-    white-space: nowrap;
-    z-index: 10;
-}
-
-/* 버튼 그룹 스타일 */
-.button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0;
-}
-
-/* 결과 컨테이너 스타일 */
-.result-container {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-/* 애니메이션 효과들 */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-}
-
-.scale-in {
-    animation: scaleIn 0.5s ease-out forwards;
-}
-/* 푸터 스타일 */
-footer {
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 3rem;
-    color: #666;
-    font-size: 0.9rem;
 }
 
 /* 심심풀이 섹션 스타일 */
@@ -290,25 +126,13 @@ footer {
     border-radius: 1rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-#killing-time h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #6d28d9;
-    margin-bottom: 1.5rem;
-    width: 100%;
-}
-
-/* 심심풀이 버튼 스타일 */
 .fun-button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     background: #7c3aed;
-    color: white;
+    color: white !important;
     border-radius: 9999px;
     text-decoration: none;
     font-weight: 600;
@@ -316,12 +140,22 @@ footer {
     margin-top: 1rem;
     min-width: 200px;
     text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .fun-button:hover {
     background: #6d28d9;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    color: #666;
+    font-size: 0.9rem;
 }
 
 /* 음소거 버튼 스타일 */
@@ -349,17 +183,31 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 모바일 반응형 스타일 */
+/* 반응형 디자인 */
 @media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .preference-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    #roulette {
+        width: 250px;
+        height: 250px;
+    }
+
+    .menu-item {
+        padding: 1rem;
+    }
+
     #killing-time {
         margin: 2rem 1rem;
         padding: 1.5rem;
     }
-    
-    #killing-time h2 {
-        font-size: 1.3rem;
-    }
-    
+
     .fun-button {
         min-width: 180px;
         padding: 0.6rem 1.2rem;
@@ -372,7 +220,7 @@ footer {
         width: 2.5rem;
         height: 2.5rem;
     }
-    
+
     footer {
         padding: 1.5rem 0;
         margin-top: 2rem;
