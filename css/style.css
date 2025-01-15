@@ -1,160 +1,295 @@
-body {
-    font-family: 'Arial', sans-serif;
+/* 기본 스타일 재설정 */
+* {
     margin: 0;
-    background-color: #f8f8f8;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-header {
-    background-color: #ff6b6b;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    width: 100%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-header img {
-    height: 50px;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2em;
-    display: inline-block;
-}
-
-main {
-    width: 90%;
-    max-width: 800px;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.preference-section {
-    background-color: white;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    background: linear-gradient(135deg, #fdf2f8 0%, #e9d5ff 100%);
+    min-height: 100vh;
+    color: #1f2937;
 }
 
-.preference-section h2 {
-    color: #ff6b6b;
-    margin-top: 0;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+/* 헤더 애니메이션 */
+.animate-title {
+    animation: floatAnimation 3s ease-in-out infinite;
 }
 
-.options {
+@keyframes floatAnimation {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* 버튼 스타일 */
+.preference-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #c084fc;
+    color: #7c3aed;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.preference-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+    background: #c084fc;
+    color: white;
+}
+
+.preference-btn.selected {
+    background: #7c3aed;
+    color: white;
+    border-color: #6d28d9;
+    transform: scale(1.05);
+}
+
+/* 룰렛 컨테이너 스타일 */
+.roulette-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 룰렛 애니메이션 */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(3600deg); }
+}
+
+.spinning {
+    animation: spin 3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 결과 카드 스타일 */
+.menu-item {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 카테고리 태그 스타일 */
+.category-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    background: #f3e8ff;
+    color: #6d28d9;
+}
+
+/* 메뉴 이름 스타일 */
+.menu-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0.5rem 0;
+}
+
+/* 설명 텍스트 스타일 */
+.menu-description {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* 가격 스타일 */
+.menu-price {
+    font-weight: 600;
+    color: #7c3aed;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* 공유 버튼 스타일 */
+.share-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: #7c3aed;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.share-button:hover {
+    background: #6d28d9;
+    transform: translateY(-2px);
+}
+
+/* 로딩 애니메이션 */
+.loading {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #7c3aed;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .preference-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .roulette-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .menu-item {
+        padding: 1rem;
+    }
+}
+
+/* 커스텀 스크롤바 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f3e8ff;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c084fc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7c3aed;
+}
+
+/* 글래스모피즘 효과 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* 툴팁 스타일 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background: #1f2937;
+    color: white;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* 버튼 그룹 스타일 */
+.button-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    justify-content: space-around;
+    gap: 0.5rem;
+    margin: 1rem 0;
 }
 
-.options button {
-    background-color: #f0f0f0;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+/* 결과 컨테이너 스타일 */
+.result-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* 애니메이션 효과들 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+/* 음소거 버튼 스타일 */
+.mute-button {
+    z-index: 1000;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+    border: 2px solid #e5e7eb;
 }
 
-.options button:hover {
-    background-color: #e0e0e0;
+.mute-button:hover {
+    transform: scale(1.1);
 }
 
-.options button.selected {
-    background-color: #ff6b6b;
-    color: white;
-}
-
-#recommendation-result {
-    background-color: #e0f7fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    text-align: center;
-}
-
-#recommendation-result h2 {
-    color: #00bcd4;
-    margin-top: 0;
-}
-
-#menu-list {
-    margin-top: 20px;
-    font-size: 1.1em;
-}
-
-#menu-list p {
-    margin-bottom: 10px;
-}
-
-#killing-time {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.fun-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #9575cd;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.fun-button:hover {
-    background-color: #7e57c2;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-    font-size: 0.8em;
-    margin-top: 40px;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.5em;
+@media (max-width: 768px) {
+    .mute-button {
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 1.2rem;
+        padding: 0.5rem;
     }
-    .options {
-        justify-content: center;
-    }
-    .options button {
-        font-size: 0.9em;
-        padding: 8px 12px;
-    }
-}
-/* ... 이전 스타일 ... */
-
-#kakao-share-button {
-    background-color: #FEE500;
-    color: #3A1D1D;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-#kakao-share-button:hover {
-    background-color: #fbd800;
 }
