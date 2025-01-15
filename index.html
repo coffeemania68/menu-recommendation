@@ -3,52 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘 저녁 뭐 먹지?</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <title>✨ 오늘 뭐 먹지? 맛잘알 가이드 ✨</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="https://blog.kakaocdn.net/dn/dzWmzX/btsLNAaXJvJ/n2T2tzushSqMFCgqkjnEKK/img.webp" type="image/webp">
 </head>
 <body>
     <header>
-        <h1>오늘 저녁 뭐 먹지?</h1>
-        <p>당신의 저녁을 책임질 메뉴 추천!</p>
+        <h1><img src="https://blog.kakaocdn.net/dn/dzWmzX/btsLNAaXJvJ/n2T2tzushSqMFCgqkjnEKK/img.webp" alt="맛잘알 가이드 로고"> ✨ 오늘 뭐 먹지? ✨</h1>
     </header>
+
     <main>
-        <section id="preference-section">
-            <h2>취향 저격 추천</h2>
-            <div class="preference-buttons">
-                </div>
-            <button id="preference-recommend">추천 받기</button>
-            <div id="preference-result"></div>
+        <section id="taste-preference" class="preference-section">
+            <h2>😋 오늘의 끌리는 맛</h2>
+            <div class="options">
+                <button data-preference="매운맛">🌶️ 매운맛이 당긴다 🔥</button>
+                <button data-preference="달달">🍯 달달한게 땡긴다 🍯</button>
+                <button data-preference="기름">🍗 기름진게 필요해 🍗</button>
+                <button data-preference="담백">🍚 담백한게 좋겠어 🍚</button>
+            </div>
         </section>
 
-        <section id="random-section">
-            <h2>랜덤 추천</h2>
-            <div id="random-cards">
-                </div>
-            <button id="random-recommend">한 번 더!</button>
-            <p id="game-message"></p> 
+        <section id="appetite-preference" class="preference-section">
+            <h2>🍽️ 현재 식욕 상태</h2>
+            <div class="options">
+                <button data-preference="폭식">📈 완전 허기져서 폭식각</button>
+                <button data-preference="적당히">⭐ 적당히 먹고 싶어</button>
+                <button data-preference="가볍게">🍃 가볍게 먹을래</button>
+                <button data-preference="술안주">🍺 술안주로 땡겨</button>
+            </div>
         </section>
 
-        <section id="theme-section">
-            <h2>테마별 추천</h2>
-            <div class="slider theme-buttons">
-                </div>
+        <section id="ingredient-preference" class="preference-section">
+            <h2>🥩 오늘의 식재료 당김</h2>
+            <div class="options">
+                <button data-preference="고기">🥩 고기각이야 확실히</button>
+                <button data-preference="해산물">🦐 해산물이 땡기네</button>
+                <button data-preference="치킨">🍗 치킨 먹고 싶어</button>
+                <button data-preference="채식">🥗 채식으로 가자</button>
+            </div>
         </section>
 
-        <section id="ad-section">
-            <p>음식 배달을 기다리는 동안 설치가 필요없는 <a href="https://coffeemania68.github.io/fortune-2025/">무료 퀴즈 게임</a>을 추천해줘</p>
-            <h2>광고 문의</h2>
-            <p>
-                이 자리에 광고를 원하시면 <a href="mailto:petsmoa2000@gmail.com">여기</a>로 문의 주세요!
-            </p>
+        <section id="mood-preference" class="preference-section">
+            <h2>😊 지금 기분</h2>
+            <div class="options">
+                <button data-preference="위로">😢 위로가 필요해</button>
+                <button data-preference="기념">🎉 행복한 날 기념</button>
+                <button data-preference="힘">🔋 피곤해서 힘나는 거</button>
+                <button data-preference="다이어트">💪 다이어트 중...</button>
+            </div>
+        </section>
+
+        <section id="atmosphere-preference" class="preference-section">
+            <h2>🌎 먹고 싶은 분위기</h2>
+            <div class="options">
+                <button data-preference="한식">🍚 한식이 그리워</button>
+                <button data-preference="이국적">🌏 이국적인 맛 도전</button>
+                <button data-preference="패스트푸드">🍔 패스트푸드 끌려</button>
+                <button data-preference="분식">🥘 분식이 당겨 떡볶이각</button>
+            </div>
+        </section>
+
+        <section id="weather-preference" class="preference-section">
+            <h2>☀️ 지금 날씨에 어울리는</h2>
+            <div class="options">
+                <button data-preference="국물">🍜 따뜻한 국물이 필요해</button>
+                <button data-preference="시원">🧊 시원한게 땡기는 날씨</button>
+                <button data-preference="볶음밥">🥘 든든한 볶음밥 각</button>
+                <button data-preference="샐러드날씨">🥗 날씨가 좋아 샐러드</button>
+            </div>
+        </section>
+
+        <section id="companion-preference" class="preference-section">
+            <h2>🧑‍🤝‍🧑 같이 먹는 사람</h2>
+            <div class="options">
+                <button data-preference="혼밥">🧍 혼밥할 거임</button>
+                <button data-preference="친구">👥 친구들과 함께</button>
+                <button data-preference="가족">👨‍👩‍👧‍👦 가족식사</button>
+                <button data-preference="데이트">💑 데이트 음식</button>
+            </div>
+        </section>
+
+        <section id="budget-preference" class="preference-section">
+            <h2>💰 현재 지갑 사정</h2>
+            <div class="options">
+                <button data-preference="넉넉">💰 돈이 많아요</button>
+                <button data-preference="적당">💵 적당히 먹어요</button>
+                <button data-preference="절약">🪙 절약 모드</button>
+                <button data-preference="가성비">⭐ 가성비 최고</button>
+            </div>
+        </section>
+
+        <section id="health-preference" class="preference-section">
+            <h2>💪 건강 상태</h2>
+            <div class="options">
+                <button data-preference="건강식">🥬 건강식으로 가자</button>
+                <button data-preference="치팅데이">🍕 오늘은 치팅데이</button>
+                <button data-preference="단백질">💪 단백질 챙길래</button>
+                <button data-preference="소화">🤒 소화가 안좋아</button>
+            </div>
+        </section>
+
+        <section id="time-preference" class="preference-section">
+            <h2>⏰ 식사 타이밍</h2>
+            <div class="options">
+                <button data-preference="저녁">🌙 저녁 식사</button>
+                <button data-preference="야식">🌜 야식 먹을래</button>
+                <button data-preference="아점">🌞 아점 먹자</button>
+                <button data-preference="간식">🍪 간식 땡겨</button>
+            </div>
+        </section>
+
+        <section id="recommendation-result">
+            <h2>✨ 오늘 당신에게 딱 맞는 저녁 메뉴는... ✨</h2>
+            <div id="menu-list">
+                <p>당신의 취향을 알려주세요! 😋</p>
+            </div>
+        </section>
+
+        <section id="killing-time">
+            <h2>⏳ 배달 올 때까지 심심하다면?</h2>
+            <a href="https://coffeemania68.github.io/fortune-2025/" target="_blank" class="fun-button">오늘의 운세 보러 가기 🔮</a>
         </section>
     </main>
+
     <footer>
-        <p>© 2025 저녁 메뉴 추천 서비스</p>
+        <p>광고문의: petsmoa2000@gmail.com | © Test Lab. All Rights Reserved.</p>
     </footer>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
     <script src="js/script.js"></script>
 </body>
 </html>
