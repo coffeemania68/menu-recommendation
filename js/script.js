@@ -203,9 +203,7 @@ const menuData = [
         { "name": "과자", "type": "구매" }, { "name": "빵", "type": "구매" },
         { "name": "아이스크림", "type": "구매" }
     ]}
-];
-
-const menuData = [
+],
     { "theme": "매운맛", "keywords": ["매운"], "items": [
         { "name": "불닭볶음면", "type": "배달" }, { "name": "마라탕", "type": "배달" },
         { "name": "낙지볶음", "type": "요리" }, { "name": "매운 갈비찜", "type": "요리" },
@@ -219,8 +217,56 @@ const menuData = [
         { "name": "과일 샐러드", "type": "요리" }, { "name": "타르트", "type": "요리" },
         { "name": "쿠키", "type": "요리" }, { "name": "브라우니", "type": "요리" },
         { "name": "파이", "type": "요리" }, { "name": "젤리", "type": "요리" }
-    ]},
-    // ... 나머지 menuData는 동일 ...
+    ]
+    },
+    {
+        "theme": "건강식",
+        "items": [
+            { "name": "퀴노아 샐러드", "link": "https://www.quinoasalad.com", "type": "요리" },
+            { "name": "그릴드 치킨과 채소", "link": "https://www.grilledchicken.com", "type": "요리" },
+            { "name": "스무디 볼", "link": "https://www.smoothiebowl.com", "type": "요리" },
+            { "name": "렌틸콩 스프", "link": "https://www.lentilsoup.com", "type": "요리" },
+            { "name": "아보카도 토스트", "link": "https://www.avocadotoast.com", "type": "요리" },
+            { "name": "채소 스틱과 후무스", "link": "https://www.veggiesticks.com", "type": "요리" },
+            { "name": "오트밀", "link": "https://www.oatmeal.com", "type": "요리" },
+            { "name": "스팀 야채", "link": "https://www.steamedveggies.com", "type": "요리" },
+            { "name": "생선구이", "link": "https://www.grilledfish.com", "type": "요리" },
+            { "name": "두부 스테이크", "link": "https://www.tofusteak.com", "type": "요리" }
+        ]
+    },
+    {
+        "theme": "지중해 요리",
+        "items": [
+            { "name": "그리스 샐러드", "link": "https://www.greeksalad.com", "type": "요리" },
+            { "name": "파에야", "link": "https://www.paella.com", "type": "요리" },
+            { "name": "타불레", "link": "https://www.tabbouleh.com", "type": "요리" },
+            { "name": "후무스", "link": "https://www.hummus.com", "type": "요리" },
+            { "name": "피타 브레드", "link": "https://www.pitabread.com", "type": "요리" },
+            { "name": "모로코식 양고기 태그인", "link": "https://www.moroccantagine.com", "type": "요리" },
+            { "name": "이탈리안 리조또", "link": "https://www.italianrisotto.com", "type": "요리" }
+        ]
+    },
+    {
+        "theme": "멕시코 요리",
+        "items": [
+            { "name": "타코", "link": "https://www.taco.com", "type": "요리" },
+            { "name": "부리또", "link": "https://www.burrito.com", "type": "배달" },
+            { "name": "엔칠라다", "link": "https://www.enchilada.com", "type": "요리" },
+            { "name": "나초", "link": "https://www.nacho.com", "type": "요리" },
+            { "name": "퀘사디아", "link": "https://www.quesadilla.com", "type": "요리" },
+            { "name": "멕시칸 라이스", "link": "https://www.mexicanrice.com", "type": "요리" }
+        ]
+    },
+    {
+        "theme": "아시아 퓨전",
+        "items": [
+            { "name": "스시 롤", "link": "https://www.sushiroll.com", "type": "배달" },
+            { "name": "팟타이", "link": "https://www.padthai.com", "type": "요리" },
+            { "name": "카레 볶음밥", "link": "https://www.curryfriedrice.com", "type": "요리" },
+            { "name": "쌀국수", "link": "https://www.pho.com", "type": "요리" },
+            { "name": "볶음면", "link": "https://www.stirfriednoodles.com", "type": "요리" }
+        ]
+    }
 ];
 
 const preferenceButtons = document.querySelectorAll('.preference-section button');
