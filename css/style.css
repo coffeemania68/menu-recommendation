@@ -272,6 +272,94 @@ body {
 .scale-in {
     animation: scaleIn 0.5s ease-out forwards;
 }
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 심심풀이 섹션 스타일 */
+#killing-time {
+    text-align: center;
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+#killing-time h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #6d28d9;
+    margin-bottom: 1rem;
+}
+
+.fun-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #7c3aed;
+    color: white;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.fun-button:hover {
+    background: #6d28d9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 음소거 버튼 스타일 */
+.mute-button {
+    position: fixed;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 2px solid #e5e7eb;
+    background: white;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 2rem;
+    right: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mute-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .mute-button {
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 1.2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    #killing-time {
+        margin: 2rem 0;
+        padding: 1.5rem;
+    }
+    
+    footer {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+}
 /* 음소거 버튼 스타일 */
 .mute-button {
     z-index: 1000;
