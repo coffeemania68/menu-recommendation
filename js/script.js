@@ -205,6 +205,24 @@ const menuData = [
     ]}
 ];
 
+const menuData = [
+    { "theme": "매운맛", "keywords": ["매운"], "items": [
+        { "name": "불닭볶음면", "type": "배달" }, { "name": "마라탕", "type": "배달" },
+        { "name": "낙지볶음", "type": "요리" }, { "name": "매운 갈비찜", "type": "요리" },
+        { "name": "떡볶이", "type": "배달" }, { "name": "매운 닭발", "type": "배달" },
+        { "name": "매운 라면", "type": "배달" }, { "name": "매운 짬뽕", "type": "배달" },
+        { "name": "매운 족발", "type": "배달" }, { "name": "매운 오징어볶음", "type": "요리" }
+    ]},
+    { "theme": "달달", "keywords": ["달콤", "디저트"], "items": [
+        { "name": "케이크", "type": "배달" }, { "name": "아이스크림", "type": "배달" },
+        { "name": "푸딩", "type": "요리" }, { "name": "마카롱", "type": "배달" },
+        { "name": "과일 샐러드", "type": "요리" }, { "name": "타르트", "type": "요리" },
+        { "name": "쿠키", "type": "요리" }, { "name": "브라우니", "type": "요리" },
+        { "name": "파이", "type": "요리" }, { "name": "젤리", "type": "요리" }
+    ]},
+    // ... 나머지 menuData는 동일 ...
+];
+
 const preferenceButtons = document.querySelectorAll('.preference-section button');
 const menuListDiv = document.getElementById('menu-list');
 let selectedPreferences = {};
@@ -227,43 +245,51 @@ preferenceButtons.forEach(button => {
 
 function recommendMenu() {
     menuListDiv.innerHTML = '';
-    let matchedMenus = [];
+    let menuScores = {}; // 메뉴별 점수를 저장할 객체
 
     if (Object.keys(selectedPreferences).length === 0) {
         menuListDiv.innerHTML = '<p>당신의 취향을 알려주세요! 😋</p>';
         return;
     }
 
+    // 각 메뉴별로 점수 계산
     menuData.forEach(menuItem => {
-        let match = true;
+        let score = 0;
         for (const prefType in selectedPreferences) {
             if (selectedPreferences.hasOwnProperty(prefType)) {
                 const selectedValue = selectedPreferences[prefType];
-                if (!menuItem.keywords.includes(selectedValue)) {
-                    match = false;
-                    break;
+                if (menuItem.keywords.includes(selectedValue)) {
+                    score++;
                 }
             }
         }
-        if (match) {
-            matchedMenus = matchedMenus.concat(menuItem.items);
-        }
+        menuItem.items.forEach(item => {
+            if (menuScores[item.name]) {
+                menuScores[item.name] += score;
+            } else {
+                menuScores[item.name] = score;
+            }
+        });
     });
 
-    if (matchedMenus.length > 0) {
-        const uniqueMenus = [...new Set(matchedMenus.map(m => m.name))];
-        uniqueMenus.forEach(menuName => {
-            const menuDetail = matchedMenus.find(m => m.name === menuName);
+    // 점수가 높은 메뉴 순으로 정렬
+    const sortedMenus = Object.entries(menuScores)
+        .sort(([, scoreA], [, scoreB]) => scoreB - scoreA);
+
+    if (sortedMenus.length > 0) {
+        sortedMenus.forEach(([menuName, score]) => {
+            const menuDetail = menuData.find(theme => theme.items.find(item => item.name === menuName)).items.find(item => item.name === menuName);
             const p = document.createElement('p');
-            p.textContent = `${menuName} (${menuDetail.type === '배달' ? '배달 🛵' : '요리 🍳'})`;
+            p.textContent = `${menuName} (${menuDetail.type === '배달' ? '배달 🛵' : '요리 🍳'}) - 매칭 점수: ${score}`;
             menuListDiv.appendChild(p);
         });
-         // "카카오톡 보내기" 버튼 추가
-         const kakaoButton = document.createElement('button');
-         kakaoButton.textContent = '😋 이 메뉴 어때? 카톡 보내기';
-         kakaoButton.id = 'kakao-share-button';
-         kakaoButton.addEventListener('click', shareOnKakao);
-         menuListDiv.appendChild(kakaoButton);
+
+        // "카카오톡 보내기" 버튼 추가
+        const kakaoButton = document.createElement('button');
+        kakaoButton.textContent = '😋 이 메뉴 어때? 카톡 보내기';
+        kakaoButton.id = 'kakao-share-button';
+        kakaoButton.addEventListener('click', shareOnKakao);
+        menuListDiv.appendChild(kakaoButton);
 
     } else {
         menuListDiv.innerHTML = '<p>음... 딱 맞는 메뉴가 없네요. 다른 걸 골라볼까요? 🤔</p>';
