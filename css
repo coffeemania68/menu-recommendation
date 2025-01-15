@@ -1,0 +1,154 @@
+body {
+    font-family: sans-serif;
+    background-color: #f8e71c; /* 밝은 노란색 배경 */
+    color: #d50000; /* 진한 빨간색 글자 */
+    margin: 0;
+}
+
+header {
+    background-color: #f57c00; /* 주황색 헤더 */
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    color: #f57c00; /* 주황색 제목 */
+}
+
+button {
+    background-color: #ff4081; /* 핫핑크 버튼 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+button:hover {
+    background-color: #c51162; /* 더 진한 핫핑크 */
+}
+
+.theme-buttons button, .preference-buttons label {
+    background-color: #448aff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-buttons button:hover, .preference-buttons label:hover {
+    background-color: #2962ff;
+}
+
+.preference-buttons label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#random-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    background-color: #ffd600; /* 노란색 카드 */
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative; /* 앞뒷면 위치 설정 */
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* 카드 앞뒷면 공통 스타일 */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* 뒷면 숨김 */
+}
+
+.card-front {
+    background-color: #ffd600; /* 노란색 앞면 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-back {
+    background-color: #d50000; /* 진한 빨간색 뒷면 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg); /* 뒷면 180도 회전 */
+}
+
+#game-message {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+#ad-section {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#ad-section h2 {
+    color: #424242;
+}
+
+#ad-section p {
+    font-size: 1em;
+    color: #616161;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
