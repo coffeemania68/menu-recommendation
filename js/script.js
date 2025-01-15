@@ -564,7 +564,6 @@ function spinRoulette() {
     }, 3000);
 }
 
-// 메뉴 추천 함수
 function recommendMenu() {
     const menuListDiv = document.getElementById('menu-list');
     menuListDiv.innerHTML = '';
@@ -580,7 +579,7 @@ function recommendMenu() {
         if (!menuItem.keywords || !Array.isArray(menuItem.keywords)) {
             return;
         }
-
+        
         let score = 0;
         for (const prefType in selectedPreferences) {
             if (selectedPreferences.hasOwnProperty(prefType)) {
@@ -603,12 +602,14 @@ function recommendMenu() {
     const sortedMenus = Object.entries(menuScores)
         .sort(([, scoreA], [, scoreB]) => scoreB - scoreA);
 
+    console.log('Menu Scores:', menuScores); // 디버깅용 출력
+
     if (sortedMenus.length > 0) {
         sortedMenus.slice(0, 3).forEach(([menuName, score]) => {
-            const menuDetail = menuData.find(theme =>
+            const menuDetail = menuData.find(theme => 
                 theme.items.find(item => item.name === menuName)
             ).items.find(item => item.name === menuName);
-
+            
             const menuItem = document.createElement('div');
             menuItem.className = 'menu-item';
             menuItem.innerHTML = `
@@ -620,7 +621,13 @@ function recommendMenu() {
         });
 
         document.getElementById('result').classList.remove('hidden');
-        // 카카오톡 공유 버튼 추가
+    } else {
+        menuListDiv.innerHTML = '<p>음... 딱 맞는 메뉴가 없네요. 다른 걸 골라볼까요? 🤔</p>';
+    }
+}
+
+
+// 카카오톡 공유 버튼 추가
         const kakaoButton = document.createElement('button');
         kakaoButton.className = 'share-button';
         kakaoButton.textContent = '😋 이 메뉴 어때? 카톡 보내기';
@@ -636,10 +643,7 @@ function recommendMenu() {
 
         SoundManager.playSuccess();
     } else {
-        menuListDiv.innerHTML = '<p>음... 딱 맞는 메뉴가 없네요. 다른 걸 골라볼까요? 🤔</p>';
-    }
-}
-
+    
 // 취향 버튼 이벤트 핸들러
 const preferenceButtons = document.querySelectorAll('.preference-section button');
 
